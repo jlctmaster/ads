@@ -1,0 +1,11 @@
+Compresor javascript code 
+http://jscompress.com/
+
+compresor css code
+http://csscompressor.com/
+
+ofuscador de codigo javascript
+http://javascriptobfuscator.com/Javascript-Obfuscator.aspx
+
+Encritar html
+http://encriptarhtml.ymas.tk/
