@@ -1,5 +1,37 @@
-<script>
-<!--
-document.write(unescape("%3C%21--Original--%3E%0A%3Clink%20rel%3D%22stylesheet%22%20type%3D%22text/css%22%20href%3D%22http%3A//adsapi.webege.com/adsapi/style.min.css%22%3E%0A%3Cscript%20type%3D%22text/javascript%22%20src%3D%22http%3A//code.jquery.com/jquery-2.1.4.min.js%22%3E%3C/script%3E%0A%3Cscript%20type%3D%22text/javascript%22%20src%3D%22http%3A//adsapi.webege.com/adsapi/ads.min.js%22%3E%3C/script%3E%0A%3Cdiv%20id%3D%22content-ads%22%3E%0A%09%3Cscript%20async%20src%3D%22//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js%22%3E%3C/script%3E%0A%09%3C%21--%20prueba%202%20--%3E%0A%09%3Cins%20class%3D%22adsbygoogle%22%0A%09%20%20%20%20%20style%3D%22display%3Ainline-block%3Bwidth%3A336px%3Bheight%3A280px%22%0A%09%20%20%20%20%20data-ad-client%3D%22ca-pub-5449593554011052%22%0A%09%20%20%20%20%20data-ad-slot%3D%222829160835%22%3E%3C/ins%3E%0A%09%3Cscript%3E%0A%09%28adsbygoogle%20%3D%20window.adsbygoogle%20%7C%7C%20%5B%5D%29.push%28%7B%7D%29%3B%0A%09%3C/script%3E%0A%3C/div%3E%0A%3C%21--Fin%20Original--%3E"));
-//-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<a href="javascript:void callPlayer(&quot;whateverID&quot;,&quot;playVideo&quot;)">Start</a> &bull; <a id="pause" href="javascript:void callPlayer(&quot;whateverID&quot;,&quot;pauseVideo&quot;)">Pause</a> &bull; <a href="javascript:void callPlayer(&quot;whateverID&quot;,&quot;stopVideo&quot;)">Stop</a> - Hover over the links to see the called function
+<br />
+<div id="whateverID"><iframe width="640" height="390" frameborder="0" title="YouTube video player" type="text/html" src="http://www.youtube.com/embed/u1zgFlCw8Aw?enablejsapi=1"></iframe></div>
+<script type="text/javascript">
+	/*
+	 * @author       Rob W (http://stackoverflow.com/a/7513356/938089
+	 * @description  Executes function on a framed YouTube video (see previous link)
+	 *               For a full list of possible functions, see:
+	 *               http://code.google.com/apis/youtube/js_api_reference.html
+	 * @param String frame_id The id of (the div containing) the frame
+	 * @param String func     Desired function to call, eg. "playVideo"
+	 * @param Array  args     (optional) List of arguments to pass to function func*/
+	function callPlayer(frame_id, func, args) {
+	    if (window.jQuery && frame_id instanceof jQuery) frame_id = frame_id.get(0).id;
+	    var iframe = document.getElementById(frame_id);
+	    if (iframe && iframe.tagName.toUpperCase() != 'IFRAME') {
+	        iframe = iframe.getElementsByTagName('iframe')[0];
+	    }
+	    if (iframe) {
+	        // Frame exists, 
+	        iframe.contentWindow.postMessage(JSON.stringify({
+	            "event": "command",
+	            "func": func,
+	            "args": args || [],
+	            "id": frame_id
+	        }), "*");
+	    }
+	}
+	$(document).ready(function(){
+		setTimeout(clicK,15000);
+		function clicK(){
+			console.log($('#pause'));
+			$('#pause').click();
+		}
+	});
 </script>
